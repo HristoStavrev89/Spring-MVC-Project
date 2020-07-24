@@ -1,0 +1,36 @@
+#promo {
+  text-align: center;
+  padding: 40px;
+  background: url(../../assets/img/abstract-wallpaper.jpg);
+  background-size: cover;
+}
+
+#iconculture {
+  font-size: 30px;
+  margin: auto;
+}
+
+#why .row {
+  padding: 30px;
+}
+
+#promo .jumbotron {
+  border-radius: 20px;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.75);
+  max-width: 800px;
+  margin: auto;
+}
+
+@media (min-width: 576px) {
+  #promo {
+    padding: 20px;
+  }
+}
+
+#why {
+  text-align: center;
+  padding: 40px;
+  line-height: 4.0;
+}
+

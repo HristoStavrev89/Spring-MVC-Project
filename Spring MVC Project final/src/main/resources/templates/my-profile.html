@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>my profile (copy)</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa+Slab+One">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/Card-Group-Classic.css">
+    <link rel="stylesheet" href="/css/Dark-Footer-1.css">
+    <link rel="stylesheet" href="/css/Dark-Footer-2.css">
+    <link rel="stylesheet" href="/css/Dark-Footer.css">
+    <link rel="stylesheet" href="/css/Dark-NavBar-1.css">
+    <link rel="stylesheet" href="/css/Dark-NavBar-2.css">
+    <link rel="stylesheet" href="/css/Dark-NavBar.css">
+    <link rel="stylesheet" href="/css/Footer-Clean.css">
+    <link rel="stylesheet" href="/css/footer-stavrev.css">
+    <link rel="stylesheet" href="/css/LinkedIn-like-Profile-Box.css">
+    <link rel="stylesheet" href="/css/nav-stavrev.css">
+    <link rel="stylesheet" href="/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="/css/Profile-Edit-Form-1.css">
+    <link rel="stylesheet" href="/css/Profile-Edit-Form.css">
+    <link rel="stylesheet" href="/css/Responsive-Form-1.css">
+    <link rel="stylesheet" href="/css/Responsive-Form.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+<th:block
+        th:include="~{/fragments/nav}">
+
+</th:block>
+    <div></div>
+    <div class="container profile profile-view" id="profile" style="height: 500px;">
+        <div class="row">
+            <div class="col-md-12 alert-col relative">
+                <div class="alert alert-info absolue center" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span>Profile save with success</span></div>
+            </div>
+        </div>
+        <form th:object="${profileModel}">
+            <div class="form-row profile-row">
+                <div class="col-md-8" id="myprofilecol">
+                    <h1 id="myprofileheading" style="font-family: Roboto, sans-serif;">My Profile</h1>
+                    <hr>
+                    <div class="form-row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group"><label>Firstname </label>
+                                <h1 style="font-size: 25px;" th:text="*{firstName}">Heading</h1>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label>Lastname </label>
+                                <h1 style="font-size: 25px;" th:text="*{secondName}">Heading</h1>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group"><label>Username</label>
+                                <h1 style="font-size: 25px;" th:text="*{username}">Heading</h1>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group"><label>Email</label>
+                                <h1 style="font-size: 25px;" th:text="*{email}">Heading</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"><label>Role </label>
+                        <h1 style="font-size: 20px;" th:each="r : *{authorities}" th:text="${r.getAuthority()}">Heading</h1>
+                    </div>
+                    <hr>
+                    <div class="form-row">
+                        <div class="col-md-12 content-right">
+                            <a class="btn btn-primary form-btn" id="edit" type="button" href="/users/profile-edit" style="background-color: rgb(59,156,0);">EDIT</a>
+                            <a class="btn btn-danger form-btn" id="back" type="button" href="/home" style="background-color: rgb(164,179,0);">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <footer>
+<th:block
+        th:include="~{/fragments/footer}">
+
+</th:block>
+    </footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/Profile-Edit-Form.js"></script>
+</body>
+
+</html>

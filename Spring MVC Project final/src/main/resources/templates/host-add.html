@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>add host</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/Dark-Footer-1.css">
+    <link rel="stylesheet" href="/css/Dark-Footer-2.css">
+    <link rel="stylesheet" href="/css/Dark-Footer.css">
+    <link rel="stylesheet" href="/css/Dark-NavBar-1.css">
+    <link rel="stylesheet" href="/css/Dark-NavBar-2.css">
+    <link rel="stylesheet" href="/css/Dark-NavBar.css">
+    <link rel="stylesheet" href="/css/Footer-Clean.css">
+    <link rel="stylesheet" href="/css/footer-stavrev.css">
+    <link rel="stylesheet" href="/css/nav-stavrev.css">
+    <link rel="stylesheet" href="/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="/css/NZDropdown---Status.css">
+    <link rel="stylesheet" href="/css/Pretty-Registration-Form.css">
+    <link rel="stylesheet" href="/css/Responsive-Form-1.css">
+    <link rel="stylesheet" href="/css/Responsive-Form-2.css">
+    <link rel="stylesheet" href="/css/Responsive-Form-3.css">
+    <link rel="stylesheet" href="/css/Responsive-Form.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+<th:block
+        th:include="~{/fragments/nav}">
+</th:block>
+    <div class="container" style="background-color: rgb(255,255,255);padding: 20px;">
+        <h1 id="header" style="height: 100px;margin-left: 400px;min-width: 0;max-width: 250px;">&nbsp; &nbsp;Add Host</h1>
+        <div>
+            <form>
+                <div class="form-group" style="background-color: rgb(255,255,255);filter: blur(0px) hue-rotate(0deg);">
+                    <div id="formdiv">
+                        <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>Name </strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1"><input class="form-control" type="text" style="margin-left:0px;font-family:Roboto, sans-serif;" name="name" placeholder="Name"></div>
+                        </div>
+                        <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>Description</strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1"><textarea class="form-control" style="font-family:Roboto, sans-serif;" placeholder="Address"></textarea></div>
+                        </div>
+                        <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>Available from</strong><br></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1"><input class="form-control" style="font-family:Roboto, sans-serif;" type="date"></div>
+                        </div>
+                        <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>Until</strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1"><input class="form-control" style="font-family:Roboto, sans-serif;" type="date"></div>
+                        </div>
+                        <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>Select Country</strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1">
+                                <select class="form-control" style="height: 28px;padding-top: 3px;padding-bottom: 3px;font-size: 12px;width: 100%;"><optgroup label="This is a group">
+                                    <option  value="12" selected="">Select Status</option>
+                                </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>Select City</strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1">
+                                <select class="form-control" style="height: 28px;padding-top: 3px;padding-bottom: 3px;font-size: 12px;width: 100%;">
+                                    <optgroup label="This is a group"><option value="12" selected="">Select Status</option>
+                                    </optgroup></select></div>
+                        </div>
+                        <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;">
+                                    <strong>Select Activity</strong>
+                                </p>
+                            </div>
+                            <div class="col-md-10 offset-md-1">
+                                <select class="form-control" style="height: 28px;padding-top: 3px;padding-bottom: 3px;font-size: 12px;width: 100%;">
+                                    <optgroup label="This is a group">
+                                        <option th:each="a : ${T(com.holidayguru.data.entities.enums.Activity).values()}" th:text="${a}" value="12" selected="">Select Status</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>Is It Free</strong></p>
+                            </div>
+                            <div class="col-md-10 offset-md-1"><select class="form-control" style="height: 28px;padding-top: 3px;padding-bottom: 3px;font-size: 12px;width: 100%;"><optgroup label="This is a group"><option value="12" selected="">Select Status</option></optgroup></select></div>
+                        </div>
+                        <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col-md-8 offset-md-1">
+                                <p style="margin-left:2%;font-family:Roboto, sans-serif;font-size:24px;"><strong>Add picture</strong></p><input type="file"></div>
+                        </div>
+                        <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
+                            <div class="col-12 col-md-4 offset-md-4"><button class="btn btn-light btn-lg" style="margin-left: 16px;background-color: rgb(0,169,17);" type="submit">Add</button><button class="btn btn-light btn-lg" style="margin-left: 16px;background-color: rgb(179,171,0);" type="submit">back</button></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <th:block
+                th:include="~{/fragments/footer}">
+        </th:block>
+    </footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

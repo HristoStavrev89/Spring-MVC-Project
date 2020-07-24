@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/Bold-BS4-Footer-Simple.css">
+    <link rel="stylesheet" href="/css/Pretty-Registration-Form.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+<div class="row register-form">
+    <div class="col-md-8 offset-md-2" style="background-color: #ffffff;">
+        <form class="custom-form" style="background-color: rgb(231,231,231);" th:action="@{/users/register}"
+              th:method="POST" th:object="${userRegisterBindingModel}">
+            <h1>Register&nbsp;</h1>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column">
+                    <label class="col-form-label" for="username">username</label>
+                </div>
+                <div class="col-sm-6 input-column">
+                    <input th:value="*{username}" id="username" name="username" placeholder="Enter username" class="form-control" type="text">
+                    <th:block th:if="${#fields.hasErrors('username')}">
+                        <small class="error" th:errors="*{username}"></small>
+                    </th:block>
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column">
+                    <label class="col-form-label" for="email">Email </label></div>
+                <div class="col-sm-6 input-column">
+                    <input id="email" name="email" placeholder="Enter email" class="form-control" type="email">
+                    <th:block th:if="${#fields.hasErrors('email')}">
+                        <small class="error" th:errors="*{email}"></small>
+                    </th:block>
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label class="col-form-label" for="password">Password </label></div>
+                <div class="col-sm-6 input-column">
+                    <input id="password" placeholder="Enter password" name="password" class="form-control" type="password">
+                    <th:block th:if="${#fields.hasErrors('password')}">
+                        <small class="error" th:errors="*{password}"></small>
+                    </th:block>
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label class="col-form-label" for="repeatPassword">Repeat
+                    Password </label></div>
+                <div class="col-sm-6 input-column">
+                    <input id="repeatPassword" placeholder="Repeat password" name="repeatPassword" class="form-control" type="password">
+                    <th:block th:if="${#fields.hasErrors('password')}">
+                        <small class="error" th:errors="*{password}"></small>
+                    </th:block>
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label class="col-form-label" for="firstName">First Name</label>
+                </div>
+                <div class="col-sm-6 input-column">
+                    <input id="firstName" placeholder="Enter First Name" name="firstName" class="form-control" type="text">
+                    <th:block th:if="${#fields.hasErrors('firstName')}">
+                        <small class="error" th:errors="*{firstName}"></small>
+                    </th:block>
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-sm-4 label-column"><label class="col-form-label" for="secondName">Second Name</label>
+                </div>
+                <div class="col-sm-6 input-column">
+                    <input id="secondName" placeholder="Enter Second Name" name="secondName" class="form-control" type="text">
+                    <th:block th:if="${#fields.hasErrors('secondName')}">
+                        <small class="error" th:errors="*{secondName}"></small>
+                    </th:block>
+                </div>
+            </div>
+            <button class="btn btn-light submit-button" type="submit" value="register">Submit</button>
+        </form>
+    </div>
+</div>
+<footer id="myFooter" style="padding:0px;">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-12">
+                <ul class="list-unstyled">
+                    <li><a href="/">Back</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/users/login">Log in</a></li>
+                    <li></li>
+                </ul>
+                <p class="footer-copyright">© 2020 HobbyBook~ Designed By&nbsp; Stavrev</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="/js/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

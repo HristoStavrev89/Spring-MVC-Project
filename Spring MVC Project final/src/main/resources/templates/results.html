@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>holiday guru result</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/Card-Group-Classic.css">
+    <link rel="stylesheet" href="/css/Dark-Footer-1.css">
+    <link rel="stylesheet" href="/css/Dark-Footer-2.css">
+    <link rel="stylesheet" href="/css/Dark-Footer.css">
+    <link rel="stylesheet" href="/css/Dark-NavBar-1.css">
+    <link rel="stylesheet" href="/css/Dark-NavBar-2.css">
+    <link rel="stylesheet" href="/css/Dark-NavBar.css">
+    <link rel="stylesheet" href="/css/Footer-Clean.css">
+    <link rel="stylesheet" href="/css/footer-stavrev.css">
+    <link rel="stylesheet" href="/css/nav-stavrev.css">
+    <link rel="stylesheet" href="/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="/css/Responsive-Form-1.css">
+    <link rel="stylesheet" href="/css/Responsive-Form.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+<th:block
+        th:include="~{/fragments/nav}">
+</th:block>
+    <div></div>
+    <div>
+        <div class="container">
+            <div class="cust_bloglistintro">
+                <h2 class="text-center">Results</h2>
+                <p class="text-muted text-center">Тук мога да добавя, че показаните резултати са за съответните държава и град.</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 cust_blogteaser"><a href="#"><img class="img-fluid" src="/img/desk.jpg"></a>
+                    <h3>Heading</h3>
+                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;">Details</a></div>
+                <div class="col-md-4 cust_blogteaser"><a href="#"><img class="img-fluid" src="/img/building.jpg"></a>
+                    <h3>Heading</h3>
+                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;">Details</a></div>
+                <div class="col-md-4 cust_blogteaser"><a href="#"><img class="img-fluid" src="/img/loft.jpg"></a>
+                    <h3>Heading</h3>
+                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;color: rgb(0,123,255);">Details</a></div>
+                <div
+                    class="col-md-4 cust_blogteaser"><a href="#"><img class="img-fluid" src="/img/minibus.jpeg"></a>
+                    <h3>Heading</h3>
+                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;">More</a></div>
+        </div>
+    </div>
+    </div>
+    <footer>
+        <th:block
+                th:include="~{/fragments/footer}">
+        </th:block>
+    </footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

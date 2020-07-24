@@ -1,0 +1,52 @@
+<th:block xmlns:th="http://www.thymeleaf.org">
+
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean" style="background-color: rgb(62,70,77);">
+        <div class="container"><i class="fa fa-globe" style="font-size: 40px;color: rgb(0,123,255);"></i><a
+                class="navbar-brand" href="#" style="color: rgb(255,255,255);">&nbsp; HolidayGuru</a>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
+                    class="navbar-toggler-icon"></span></button>
+            <div
+                    class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="/admin" style="color: rgb(249,249,249);"><i class="fa fa-user-md"
+                                                                                              style="font-size: 20px;"></i>&nbsp;
+                            Admin</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="/home" style="color: rgb(249,249,249);"><i class="fa fa-home"
+                                                                                             style="font-size: 20px;"></i>&nbsp;
+                            Home</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="#" style="color: rgb(249,249,249);"><i class="fa fa-picture-o"
+                                                                                         style="font-size: 20px;"></i>&nbsp;
+                            Gallery</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="/users/my-profile" style="color: rgb(249,249,249);"><i
+                                class="fa fa-user"
+                                style="font-size: 20px;"></i>&nbsp;
+                            My Profile</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"
+                           style="color: rgb(255,255,255);">Host</a>
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" role="presentation" href="/host/add">Add Host</a>
+                            <a class="dropdown-item" role="presentation" href="/host/my-hosts">My Hosts</a>
+
+                        </div>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" th:href="@{/logout}"
+                           style="background-color: #e15454;color: rgb(255,255,255);">
+                            <i
+                                    class="fa fa-sign-out" style="font-size: 20px;"></i>&nbsp; Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</th:block>
