@@ -10,11 +10,18 @@ import javax.validation.constraints.NotNull;
 public class City extends BaseEntity{
 
     private String name;
-    private String region;
+
     private Country country;
 
     public City() {
     }
+
+    public City(String name, Country country){
+        this.name = name;
+        this.country = country;
+    }
+
+
 
     @Column
     @NotNull(message = "The name of the city cannot be null.")
@@ -27,16 +34,6 @@ public class City extends BaseEntity{
         this.name = name;
     }
 
-
-    @Column
-    @NotNull(message = "The region cannot be null.")
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
 
     @ManyToOne
     public Country getCountry() {

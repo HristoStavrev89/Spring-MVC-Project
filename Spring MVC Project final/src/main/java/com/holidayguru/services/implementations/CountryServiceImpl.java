@@ -3,7 +3,10 @@ package com.holidayguru.services.implementations;
 import com.holidayguru.data.entities.Country;
 import com.holidayguru.data.entities.enums.Countries;
 import com.holidayguru.data.repositories.CountryRepository;
+import com.holidayguru.exceptions.CountryNotFoundException;
 import com.holidayguru.services.interfaces.CountryService;
+import com.holidayguru.services.models.CountryServiceModel;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +16,12 @@ import java.util.List;
 @Service
 public class CountryServiceImpl implements CountryService {
     private final CountryRepository countryRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public CountryServiceImpl(CountryRepository countryRepository) {
+    public CountryServiceImpl(CountryRepository countryRepository, ModelMapper modelMapper) {
         this.countryRepository = countryRepository;
+        this.modelMapper = modelMapper;
     }
 
 
@@ -24,24 +29,22 @@ public class CountryServiceImpl implements CountryService {
     public void seedCountries() {
 
         if (this.countryRepository.count() == 0) {
-
-//            Country bulgaria = new Country("Bulgaria");
-//            Country spain = new Country("Spain");
-//            Country france = new Country("France");
-//            Country germany = new Country("Germany");
-//            Country england = new Country("England");
-
             List<Country> countryList = new ArrayList<>();
-
             for (Countries country : Countries.values()) {
                 countryList.add(new Country(country.name()));
             }
 
-
-            System.out.println();
+            this.countryRepository.saveAll(countryList);
 
         }
 
 
+    }
+
+    @Override
+    public CountryServiceModel findByName(String name) {
+        Country country = this.countryRepository.findByName(name)
+                .orElseThrow(() -> new CountryNotFoundException("Country not found."));
+        return this.modelMapper.map(country, CountryServiceModel.class);
     }
 }

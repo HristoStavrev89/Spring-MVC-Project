@@ -15,6 +15,8 @@ public class Host extends BaseEntity{
     private String description;
     private City city;
 
+
+
     private User user;
     private boolean isAvailable;
     private boolean isFree;
