@@ -1,32 +1,32 @@
-package com.holidayguru.web.controllers.models.bindingModels;
-import net.bytebuddy.implementation.bind.annotation.Empty;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotNull;
+package com.holidayguru.services.models;
+
+import com.holidayguru.data.entities.City;
+import com.holidayguru.data.entities.User;
+import com.holidayguru.data.entities.enums.Activity;
+import com.holidayguru.data.entities.enums.Cities;
+
 import java.time.LocalDate;
 
-public class HostAddBindingModel {
+public class HostServiceModel extends BaseServiceModel {
+
 
     private String name;
-    private String activity;
+    private Activity activity;
     private String description;
+
     private String city;
 
-    private MultipartFile image;
+    private String image;
 
     private LocalDate availableFrom;
     private LocalDate until;
 
+    private UserServiceModel user;
     private boolean isFree;
 
-
-    public HostAddBindingModel() {
+    public HostServiceModel() {
     }
 
-
-    @Length(min = 6, message = "The name must be more than 6 characters.")
     public String getName() {
         return name;
     }
@@ -35,16 +35,14 @@ public class HostAddBindingModel {
         this.name = name;
     }
 
-
-    public String getActivity() {
+    public Activity getActivity() {
         return activity;
     }
 
-    public void setActivity(String activity) {
+    public void setActivity(Activity activity) {
         this.activity = activity;
     }
 
-    @Length(min = 20, message = "The description must be more than 20 characters.")
     public String getDescription() {
         return description;
     }
@@ -61,28 +59,22 @@ public class HostAddBindingModel {
         this.city = city;
     }
 
-
-    public MultipartFile getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(MultipartFile image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    @FutureOrPresent(message = "The date cannot be in the past.")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     public LocalDate getAvailableFrom() {
         return availableFrom;
     }
-
 
     public void setAvailableFrom(LocalDate availableFrom) {
         this.availableFrom = availableFrom;
     }
 
-    @FutureOrPresent(message = "The date cannot be in the past.")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     public LocalDate getUntil() {
         return until;
     }
@@ -91,5 +83,12 @@ public class HostAddBindingModel {
         this.until = until;
     }
 
+    public UserServiceModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserServiceModel user) {
+        this.user = user;
+    }
 
 }

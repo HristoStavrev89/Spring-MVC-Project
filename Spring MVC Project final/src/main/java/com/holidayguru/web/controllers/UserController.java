@@ -110,24 +110,13 @@ public class UserController {
             redirectAttributes.addFlashAttribute("userProfileEditBindingModel", userProfileEditBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userProfileEditBindingModel", bindingResult);
 
-            System.out.println();
-
             return "redirect:profile-edit";
         }
 
         UserServiceModel userServiceModel = this.modelMapper.map(userProfileEditBindingModel, UserServiceModel.class);
 
-        System.out.println();
-
         this.userService.editUserProfile(userServiceModel, userProfileEditBindingModel);
-
-        System.out.println();
-
 
         return "redirect:my-profile";
     }
-
-
-
-
 }

@@ -4,10 +4,13 @@ import com.holidayguru.data.entities.City;
 import com.holidayguru.data.entities.Country;
 import com.holidayguru.data.repositories.CityRepository;
 import com.holidayguru.data.repositories.CountryRepository;
+import com.holidayguru.exceptions.CityNotFoundException;
 import com.holidayguru.exceptions.CountryNotFoundException;
 import com.holidayguru.services.interfaces.CityService;
 import com.holidayguru.services.interfaces.CountryService;
+import com.holidayguru.services.models.CityServiceModel;
 import com.holidayguru.services.models.CountryServiceModel;
+import org.hibernate.annotations.NotFoundAction;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,4 +78,13 @@ public class CityServiceImpl implements CityService {
 
 
     }
+
+    @Override
+    public CityServiceModel findByName(String name) {
+        City city = this.cityRepository.findByName(name).orElseThrow(() -> new CityNotFoundException("City not found"));
+
+        return this.modelMapper.map(city, CityServiceModel.class);
+    }
+
+
 }
