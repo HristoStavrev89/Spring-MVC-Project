@@ -65,16 +65,37 @@
                         <td th:text="${user.firstName}">Maldonado</td>
                         <td th:text="${user.secondName}">Maldonado</td>
                         <td th:text="${user.email}">imaldonado@gmail.com</td>
-                        <td th:each="auth : ${user.getAuthorities()}" th:text="${auth.getAuthority()}">Authorities</td>
+                        <td th:each="auth : ${user.getAuthorities()}" th:text="${auth.getAuthority()}"
+
+                        >Authorities</td>
                         <!--                <td>-->
                         <!--                    <input  type = "checkbox" disabled/></td>-->
                         <td>
-                            <button type="button" class="btn btn-danger"><i
-                                    class="far fa-trash-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i>
-                            </button>
-                            <button type="button" class="btn btn-warning"><i
+                            <form th:action="@{/admin/change-role/{id}(id=${user.getId()})}" th:method="POST" th:object="${roleBindingModel}">
+                            <label for="role">Change the role to:</label>
+                            <select name="role" id="role">
+                                <option th:each="r : ${allRoles}" th:text="${r.getAuthority()}">Volvo</option>
+                                <!--                                <option value="admin">Saab</option>-->
+                                <!--                                <option value="user">Mercedes</option>-->
+                                <!--                                <option value="moderator">Audi</option>-->
+                            </select>
+                            <button type="submit" class="btn btn-warning" title="Change Role" ><i
                                     class="fas fa-pencil-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i>
                             </button>
+                                <a type="button" class="btn btn-danger" title="Delete" th:href="@{/admin/delete/{id}(id=${user.getId()})}"><i
+                                        class="far fa-trash-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i>
+                                </a>
+                            </form>
+<!--                            <a type="button" class="btn btn-danger" title="Delete" th:href="@{/admin/delete/{id}(id=${user.getId()})}"><i-->
+<!--                                    class="far fa-trash-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i>-->
+<!--                            </a>-->
+<!--                            <label for="role">Change the role to:</label>-->
+<!--                            <select name="role" id="role">-->
+<!--                                <option th:each="r : ${allRoles}" th:text="${r.getAuthority()}" value="root">Volvo</option>-->
+<!--                                <option value="admin">Saab</option>-->
+<!--                                <option value="user">Mercedes</option>-->
+<!--                                <option value="moderator">Audi</option>-->
+<!--                            </select>-->
                         </td>
                     </tr>
                     <!--   <tr>-->

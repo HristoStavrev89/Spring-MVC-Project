@@ -1,8 +1,11 @@
 package com.holidayguru.services.implementations;
+import com.holidayguru.data.entities.Role;
 import com.holidayguru.data.entities.User;
 import com.holidayguru.data.repositories.UserRepository;
+import com.holidayguru.exceptions.UserNotFoundException;
 import com.holidayguru.services.interfaces.RoleService;
 import com.holidayguru.services.interfaces.UserService;
+import com.holidayguru.services.models.RoleServiceModel;
 import com.holidayguru.services.models.UserServiceModel;
 import com.holidayguru.web.controllers.models.bindingModels.UserProfileEditBindingModel;
 import com.holidayguru.web.controllers.models.viewModels.RoleView;
@@ -151,5 +154,25 @@ public class UserServiceImpl implements UserService{
                 .stream()
                 .map(user -> this.modelMapper.map(user, UserServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteUserById(String userId) {
+        User user = this.userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("Can't find user."));
+        this.userRepository.delete(user);
+    }
+
+    @Override
+    public void changeUserRole(String userId, String role) {
+        User user = this.userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("Can't find user."));
+
+        RoleServiceModel roleServiceModel = this.roleService.findByAuthority(role);
+
+        user.getAuthorities().clear();
+        user.getAuthorities().add(this.modelMapper.map(roleServiceModel, Role.class));
+
+        this.userRepository.saveAndFlush(user);
     }
 }

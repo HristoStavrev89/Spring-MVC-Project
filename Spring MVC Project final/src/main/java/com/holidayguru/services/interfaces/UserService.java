@@ -18,4 +18,9 @@ public interface UserService extends UserDetailsService {
     List<UserServiceModel> findAllUsers();
 
     List<UserProfileViewModel> getAllUsersWithoutRootRole(String username);
+
+    void deleteUserById(String userId);
+
+    void changeUserRole(String userId, String role);
+
 }

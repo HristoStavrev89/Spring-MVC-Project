@@ -51,8 +51,6 @@ public class HostController {
             model.addAttribute("hostAddBindingModel", new HostAddBindingModel());
         }
 
-        //Da go izvikam predi dobavqneto na host
-        this.cityService.seedCities();
         return "/host-add";
     }
 
