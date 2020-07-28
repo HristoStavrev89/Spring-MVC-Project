@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService{
         User user = this.userRepository.findByUsername(userServiceModel.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User with username %s is not found!", userServiceModel.getUsername())));
 
-        //todo
+        //da go dovur6a
         if ( ! this.bCryptPasswordEncoder.matches(userServiceModel.getPassword(), user.getPassword())) {
 
             throw new UsernameNotFoundException("Incorrect password");

@@ -3,11 +3,13 @@ package com.holidayguru.services.implementations;
 import com.holidayguru.data.entities.City;
 import com.holidayguru.data.entities.Host;
 import com.holidayguru.data.entities.User;
+import com.holidayguru.data.entities.enums.Activity;
 import com.holidayguru.data.repositories.CityRepository;
 import com.holidayguru.data.repositories.HostRepository;
 import com.holidayguru.data.repositories.UserRepository;
 import com.holidayguru.services.interfaces.CityService;
 import com.holidayguru.services.interfaces.HostService;
+import com.holidayguru.services.models.CityServiceModel;
 import com.holidayguru.services.models.HostServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +77,21 @@ public class HostServiceImpl implements HostService {
 
         this.hostRepository.deleteById(hostId);
 
+    }
+
+    @Override
+    public List<HostServiceModel> findAllByCity(String city, String activity) {
+
+        CityServiceModel cityServiceModel = this.cityService.findByName(city);
+
+        List<Host> hosts = this.hostRepository.findAllByCity(this.modelMapper.map(cityServiceModel, City.class))
+                .stream()
+                .filter(h -> !h.getActivity().getName().equals(activity))
+                .collect(Collectors.toList());
+
+        return hosts
+                .stream()
+                .map(h -> this.modelMapper.map(h, HostServiceModel.class))
+                .collect(Collectors.toList());
     }
 }
