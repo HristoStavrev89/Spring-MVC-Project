@@ -1,32 +1,36 @@
-package com.holidayguru.web.controllers.models.bindingModels;
-import net.bytebuddy.implementation.bind.annotation.Empty;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotNull;
+package com.holidayguru.web.controllers.models.viewModels;
+
+import com.holidayguru.data.entities.City;
+import com.holidayguru.data.entities.enums.Activity;
+import com.holidayguru.data.entities.enums.Cities;
+
 import java.time.LocalDate;
 
-public class HostAddBindingModel {
+public class HostViewModel {
 
+    private String id;
     private String name;
     private String activity;
     private String description;
-    private String city;
+    private CityViewModel city;
 
-    private MultipartFile image;
+    private String image;
 
     private LocalDate availableFrom;
     private LocalDate until;
 
-    private boolean isFree;
-
-
-    public HostAddBindingModel() {
+    public HostViewModel() {
     }
 
 
-    @Length(min = 6, message = "The name must be more than 6 characters.")
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -34,7 +38,6 @@ public class HostAddBindingModel {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public String getActivity() {
         return activity;
@@ -44,7 +47,6 @@ public class HostAddBindingModel {
         this.activity = activity;
     }
 
-    @Length(min = 20, message = "The description must be more than 20 characters.")
     public String getDescription() {
         return description;
     }
@@ -53,37 +55,30 @@ public class HostAddBindingModel {
         this.description = description;
     }
 
-    public String getCity() {
+    public CityViewModel getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(CityViewModel city) {
         this.city = city;
     }
 
-
-
-    public MultipartFile getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(MultipartFile image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    @FutureOrPresent(message = "The date cannot be in the past.")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     public LocalDate getAvailableFrom() {
         return availableFrom;
     }
-
 
     public void setAvailableFrom(LocalDate availableFrom) {
         this.availableFrom = availableFrom;
     }
 
-    @FutureOrPresent(message = "The date cannot be in the past.")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     public LocalDate getUntil() {
         return until;
     }
@@ -91,6 +86,4 @@ public class HostAddBindingModel {
     public void setUntil(LocalDate until) {
         this.until = until;
     }
-
-
 }

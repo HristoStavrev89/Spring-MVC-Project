@@ -2,17 +2,35 @@
 
     <nav class="navbar navbar-light navbar-expand-md navigation-clean" style="background-color: rgb(62,70,77);">
         <div class="container"><i class="fa fa-globe" style="font-size: 40px;color: rgb(0,123,255);"></i><a
-                class="navbar-brand" href="#" style="color: rgb(255,255,255);">&nbsp; HolidayGuru</a>
+                class="navbar-brand" href="/home" style="color: rgb(255,255,255);">&nbsp; HolidayGuru</a>
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
                     class="navbar-toggler-icon"></span></button>
             <div
                     class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" href="/admin" style="color: rgb(249,249,249);"><i class="fa fa-user-md"
-                                                                                              style="font-size: 20px;"></i>&nbsp;
-                            Admin</a>
-                    </li>
+
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="/admin" style="color: rgb(249,249,249);">
+                                <i class="fa fa-user-md"
+                                   style="font-size: 20px;">
+
+                                </i>&nbsp;
+                                Admin</a>
+                        </li>
+                    </th:block>
+
+<!--                    <li class="nav-item" role="presentation">-->
+<!--                        <a class="nav-link" href="/admin" style="color: rgb(249,249,249);">-->
+<!--                            <i class="fa fa-user-md"-->
+<!--                               style="font-size: 20px;">-->
+
+<!--                            </i>&nbsp;-->
+<!--                            Admin</a>-->
+<!--                    </li>-->
+
+
+
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" href="/home" style="color: rgb(249,249,249);"><i class="fa fa-home"
                                                                                              style="font-size: 20px;"></i>&nbsp;

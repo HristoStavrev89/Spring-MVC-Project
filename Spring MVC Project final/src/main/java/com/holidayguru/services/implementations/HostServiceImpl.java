@@ -14,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class HostServiceImpl implements HostService {
     private final ModelMapper modelMapper;
@@ -45,18 +48,32 @@ public class HostServiceImpl implements HostService {
 
         City city = this.modelMapper.map(this.cityService.findByName(hostServiceModel.getCity()), City.class);
 
-        //todo set city
 
         host.setCity(city);
         //todo check the comments
-        //todo check the dates
-
-
-        //todo check
 
         this.hostRepository.saveAndFlush(host);
-        System.out.println();
 
         return this.modelMapper.map(host, HostServiceModel.class);
+    }
+
+
+    @Override
+    public List<HostServiceModel> findAllByUserId(String userId) {
+
+        List<HostServiceModel> hostServiceModelList = this.hostRepository.findAllByUser_Id(userId)
+                .stream()
+                .map(h -> this.modelMapper.map(h, HostServiceModel.class))
+                .collect(Collectors.toList());
+
+        return hostServiceModelList;
+    }
+
+
+    @Override
+    public void deleteHostById(String hostId) {
+
+        this.hostRepository.deleteById(hostId);
+
     }
 }

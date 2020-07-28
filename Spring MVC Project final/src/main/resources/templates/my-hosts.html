@@ -31,25 +31,41 @@
 </th:block>
     <div></div>
     <div>
-        <div class="container">
+        <div class="container" >
             <div class="cust_bloglistintro">
                 <h2 class="text-center">My Hosts</h2>
                 <p class="text-muted text-center">Тук мога да добавя, че показаните резултати са за съответните държава и град.</p>
             </div>
             <div class="row">
-                <div class="col-md-4 cust_blogteaser"><a href="#"><img class="img-fluid" src="/img/desk.jpg"></a>
-                    <h3>Heading</h3>
-                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;">Edit</a></div>
-                <div class="col-md-4 cust_blogteaser"><a href="#"><img class="img-fluid" src="/img/building.jpg"></a>
-                    <h3>Heading</h3>
-                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;">Edit</a></div>
-                <div class="col-md-4 cust_blogteaser"><a href="#"><img class="img-fluid" src="/img/loft.jpg"></a>
-                    <h3>Heading</h3>
-                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;color: rgb(0,123,255);">Edit</a></div>
-                <div
-                    class="col-md-4 cust_blogteaser"><a href="#"><img class="img-fluid" src="/img/minibus.jpeg"></a>
-                    <h3>Heading</h3>
-                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;">Edit</a></div>
+                <th:block th:each="host : ${hostViewModelList}" th:object="${host}">
+                    <div class="col-md-4 cust_blogteaser">
+                        <a href="#">
+                        <img class="img-fluid" th:src="*{image}" style="width:250px;height:350px;"></a>
+                        <h3 th:text="*{name}">Heading</h3>
+                        <h5 th:text="'Activity: ' + *{activity}">Activity</h5>
+                        <h5 th:text="'Available from: ' + *{availableFrom}">Available from:</h5>
+                        <h5 th:text="'Until: ' + *{until}">Until</h5>
+                        <h3>Description</h3>
+                        <p class="text-secondary" th:text="*{description}">Aene aliquam in tellus eu  justo suscipit id. </p>
+                        <a th:href="@{/host/my-hosts/delete/{id}(id=${host.getId()})}" class="btn btn-danger" style="font-size: 25px;">Delete</a>
+                    </div>
+                </th:block>
+<!--                <div class="col-md-4 cust_blogteaser"><a href="#">-->
+<!--                    <img class="img-fluid" src="/img/building.jpg"></a>-->
+<!--                    <h3>Heading</h3>-->
+<!--                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p>-->
+<!--                    <a href="#" style="font-size: 25px;">Edit</a></div>-->
+<!--                <div class="col-md-4 cust_blogteaser"><a href="#">-->
+<!--                    <img class="img-fluid" src="/img/loft.jpg"></a>-->
+<!--                    <h3>Heading</h3>-->
+<!--                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p>-->
+<!--                    <a href="#" style="font-size: 25px;color: rgb(0,123,255);">Edit</a></div>-->
+<!--                <div-->
+<!--                    class="col-md-4 cust_blogteaser"><a href="#">-->
+<!--                    <img class="img-fluid" src="/img/minibus.jpeg"></a>-->
+<!--                    <h3>Heading</h3>-->
+<!--                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p>-->
+<!--                    <a href="#" style="font-size: 25px;">Edit</a></div>-->
         </div>
     </div>
     </div>

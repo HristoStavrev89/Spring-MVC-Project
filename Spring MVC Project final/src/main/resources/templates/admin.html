@@ -34,80 +34,88 @@
 <th:block
         th:include="~{/fragments/nav}">
 </th:block>
-    <div style="padding: 30px;height: 650px;background-color: #ffffff;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h2 style="width: 343px;">All Users</h2>
-                </div>
+<div style="padding: 30px;height: 650px;background-color: #ffffff;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2 style="width: 343px;">All Users</h2>
             </div>
-            <div class="row">
-                <div class="col-md-12"><table id="example" class="table table-bordered table-hover" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>Id </th>
-                <th>Nombre</th>
-                <th>Ap. Paterno</th>
-                <th>Ap. Materno</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-                <th>Estado</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-           
-            <tr>
-                <td>01</td>
-                <td>Ignacio</td>
-                <td>Maldonado</td>
-                <td>Maldonado</td>
-                <td>imaldonado@gmail.com</td>
-                <td>+569 87654321</td>
-                <td><input  type = "checkbox" disabled/></td>
-                    <td><button type="button" class="btn btn-danger"><i class="far fa-trash-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>
-<button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>
-<button type="button" class="btn btn-info"><i class="fas fa-address-book d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>
-                    </td>
-            </tr>
-   <tr>
-                <td>02</td>
-                <td>Xander</td>
-                <td>Cuevas</td>
-                <td>Maldonado</td>
-                <td>imaldonado@gmail.com</td>
-                <td>+569 87654321</td>
-                <td><input type = "checkbox" disabled  checked /></td>
-                    <td><button type="button" class="btn btn-danger"><i class="far fa-trash-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>
-<button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>
-                        <button type="button" class="btn btn-info"><i class="fas fa-address-book d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>
-                    </td>
-            </tr>
-              <tr>
-                <td>03</td>
-                <td>Ignacio</td>
-                <td>Maldonado</td>
-                <td>Maldonado</td>
-                <td>imaldonado@gmail.com</td>
-                <td>+569 87654321</td>
-                <td><input type = "checkbox" disabled/></td>
-                    <td><button type="button" class="btn btn-danger"><i class="far fa-trash-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>
-<button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>
-                        <button type="button" class="btn btn-info"><i class="fas fa-address-book d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>
-                    </td>
-            </tr>
-        </tbody>
-    </table></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table id="example" class="table table-bordered table-hover" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Second Name</th>
+                        <th>Email</th>
+                        <th>Authorities</th>
+                        <th>Action</th>
+                        <!--                <th>Acción</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    <tr th:each="user, num : ${userProfileViewModels}">
+                        <td th:text="${num.index + 1}">01</td>
+                        <td th:text="${user.username}">Ignacio</td>
+                        <td th:text="${user.firstName}">Maldonado</td>
+                        <td th:text="${user.secondName}">Maldonado</td>
+                        <td th:text="${user.email}">imaldonado@gmail.com</td>
+                        <td th:each="auth : ${user.getAuthorities()}" th:text="${auth.getAuthority()}">Authorities</td>
+                        <!--                <td>-->
+                        <!--                    <input  type = "checkbox" disabled/></td>-->
+                        <td>
+                            <button type="button" class="btn btn-danger"><i
+                                    class="far fa-trash-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning"><i
+                                    class="fas fa-pencil-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <!--   <tr>-->
+                    <!--                <td>02</td>-->
+                    <!--                <td>Xander</td>-->
+                    <!--                <td>Cuevas</td>-->
+                    <!--                <td>Maldonado</td>-->
+                    <!--                <td>imaldonado@gmail.com</td>-->
+                    <!--                <td>+569 87654321</td>-->
+                    <!--                <td><input type = "checkbox" disabled  checked /></td>-->
+                    <!--                    <td><button type="button" class="btn btn-danger"><i class="far fa-trash-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>-->
+                    <!--<button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>-->
+                    <!--                        <button type="button" class="btn btn-info"><i class="fas fa-address-book d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>-->
+                    <!--                    </td>-->
+                    <!--            </tr>-->
+                    <!--              <tr>-->
+                    <!--                <td>03</td>-->
+                    <!--                <td>Ignacio</td>-->
+                    <!--                <td>Maldonado</td>-->
+                    <!--                <td>Maldonado</td>-->
+                    <!--                <td>imaldonado@gmail.com</td>-->
+                    <!--                <td>+569 87654321</td>-->
+                    <!--                <td><input type = "checkbox" disabled/></td>-->
+                    <!--                    <td><button type="button" class="btn btn-danger"><i class="far fa-trash-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>-->
+                    <!--<button type="button" class="btn btn-warning"><i class="fas fa-pencil-alt d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>-->
+                    <!--                        <button type="button" class="btn btn-info"><i class="fas fa-address-book d-xl-flex justify-content-xl-center align-items-xl-center"></i></button>-->
+                    <!--                    </td>-->
+                    <!--            </tr>-->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <footer>
-        <th:block
-                th:include="~{/fragments/footer}">
-        </th:block>
-    </footer>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+</div>
+<footer>
+    <th:block
+            th:include="~{/fragments/footer}">
+    </th:block>
+</footer>
+<script src="/js/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -5,6 +5,8 @@ import com.holidayguru.services.interfaces.RoleService;
 import com.holidayguru.services.interfaces.UserService;
 import com.holidayguru.services.models.UserServiceModel;
 import com.holidayguru.web.controllers.models.bindingModels.UserProfileEditBindingModel;
+import com.holidayguru.web.controllers.models.viewModels.RoleView;
+import com.holidayguru.web.controllers.models.viewModels.UserProfileViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -114,5 +118,38 @@ public class UserServiceImpl implements UserService{
        }
 
        return this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
+    }
+
+    @Override
+    public List<UserProfileViewModel> getAllUsersWithoutRootRole(String username) {
+
+
+        List<UserProfileViewModel> userProfileViewModels = this.userRepository
+                .findAll()
+                .stream()
+                .map(user -> {
+                    UserProfileViewModel userProfileViewModel = this.modelMapper.map(user, UserProfileViewModel.class);
+
+                    Set<RoleView> roleViews = userProfileViewModel.getAuthorities()
+                            .stream()
+                            .map(r -> this.modelMapper.map(r, RoleView.class)).collect(Collectors.toSet());
+
+                    userProfileViewModel.setAuthorities(roleViews);
+
+                    return userProfileViewModel;
+
+                })
+                .filter(usr -> usr.getAuthorities().size() != 4)
+                .collect(Collectors.toList());
+
+        return userProfileViewModels;
+    }
+
+    @Override
+    public List<UserServiceModel> findAllUsers() {
+        return this.userRepository.findAll()
+                .stream()
+                .map(user -> this.modelMapper.map(user, UserServiceModel.class))
+                .collect(Collectors.toList());
     }
 }

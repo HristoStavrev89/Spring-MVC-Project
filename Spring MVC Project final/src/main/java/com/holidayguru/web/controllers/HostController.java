@@ -1,26 +1,26 @@
 package com.holidayguru.web.controllers;
 
-import com.holidayguru.services.interfaces.CityService;
-import com.holidayguru.services.interfaces.CloudinaryService;
-import com.holidayguru.services.interfaces.CountryService;
-import com.holidayguru.services.interfaces.HostService;
+import com.holidayguru.data.entities.Host;
+import com.holidayguru.services.interfaces.*;
 import com.holidayguru.services.models.HostServiceModel;
+import com.holidayguru.services.models.UserServiceModel;
 import com.holidayguru.web.controllers.models.bindingModels.HostAddBindingModel;
+import com.holidayguru.web.controllers.models.viewModels.HostViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/host")
@@ -30,14 +30,16 @@ public class HostController {
     private final ModelMapper modelMapper;
     private final CloudinaryService cloudinaryService;
     private final HostService hostService;
+    private final UserService userService;
 
     @Autowired
-    public HostController(CountryService countryService, CityService cityService, ModelMapper modelMapper, CloudinaryService cloudinaryService, HostService hostService) {
+    public HostController(CountryService countryService, CityService cityService, ModelMapper modelMapper, CloudinaryService cloudinaryService, HostService hostService, UserService userService) {
         this.countryService = countryService;
         this.cityService = cityService;
         this.modelMapper = modelMapper;
         this.cloudinaryService = cloudinaryService;
         this.hostService = hostService;
+        this.userService = userService;
     }
 
 
@@ -60,34 +62,60 @@ public class HostController {
     public String addHostConfirm(@Valid @ModelAttribute("hostAddBindingModel") HostAddBindingModel hostAddBindingModel,
                                  BindingResult bindingResult, RedirectAttributes redirectAttributes, Principal principal) throws IOException {
 
-
         if (bindingResult.hasErrors() || hostAddBindingModel.getImage().isEmpty()){
             redirectAttributes.addFlashAttribute("hostAddBindingModel", hostAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.hostAddBindingModel", bindingResult);
 
-            //todo print the errors into the form
-
-            System.out.println();
             return "redirect:host-add";
         }
 
-        //todo dobavqneto na snimka da e ZADULJITELNO
-
-
-
         String username = principal.getName();
         HostServiceModel hostServiceModel = this.modelMapper.map(hostAddBindingModel, HostServiceModel.class);
-        System.out.println();
+
+
+        //todo the image should me smaller than 1mb!!!!
+
         hostServiceModel.setImage(this.cloudinaryService.uploadImg(hostAddBindingModel.getImage()));
-        System.out.println();
+
 
         HostServiceModel hostServiceModel1 = this.hostService.saveHost(hostServiceModel, username);
-
-        System.out.println();
 
         return "redirect:/home";
     }
 
+
+    @GetMapping("/my-hosts")
+    @PreAuthorize("isAuthenticated()")
+    public ModelAndView myHosts(Principal principal, ModelAndView modelAndView){
+
+        String username = principal.getName();
+
+        UserServiceModel userServiceModel = this.userService.findByUsername(username);
+
+       String id = userServiceModel.getId();
+
+
+        List<HostViewModel> hostViewModelList = this.hostService.findAllByUserId(id)
+                .stream()
+                .map(h -> this.modelMapper.map(h, HostViewModel.class))
+                .collect(Collectors.toList());
+
+
+        modelAndView.addObject("hostViewModelList", hostViewModelList);
+        modelAndView.setViewName("my-hosts");
+
+
+
+        return modelAndView;
+    }
+
+    @GetMapping("/my-hosts/delete/{id}")
+    public String hostDelete(@PathVariable String id){
+
+        this.hostService.deleteHostById(id);
+
+        return "redirect:/home";
+    }
 
 
 }

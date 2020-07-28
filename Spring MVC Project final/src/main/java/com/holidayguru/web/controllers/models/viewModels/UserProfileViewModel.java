@@ -14,7 +14,7 @@ public class UserProfileViewModel {
     private String firstName;
     private String secondName;
 
-    private Set<Role> authorities;
+    private Set<RoleView> authorities;
 
     public UserProfileViewModel() {
     }
@@ -67,11 +67,11 @@ public class UserProfileViewModel {
         this.secondName = secondName;
     }
 
-    public Set<Role> getAuthorities() {
+    public Set<RoleView> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(Set<Role> authorities) {
+    public void setAuthorities(Set<RoleView> authorities) {
         this.authorities = authorities;
     }
 }

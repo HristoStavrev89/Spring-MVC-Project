@@ -49,6 +49,9 @@
                             </div>
                             <div class="col-md-10 offset-md-1" >
                                 <input id="name" class="form-control" type="text" style="margin-left:0px;font-family:Roboto, sans-serif;" name="name" placeholder="Name">
+                                <th:block th:if="${#fields.hasErrors('name')}">
+                                    <small class="text-danger" th:errors="*{name}"></small>
+                                </th:block>
                             </div>
                         </div>
                         <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
@@ -61,6 +64,9 @@
                             </div>
                             <div class="col-md-10 offset-md-1">
                                 <textarea id="description" class="form-control" name="description" style="font-family:Roboto, sans-serif;" placeholder="Description"></textarea>
+                                <th:block th:if="${#fields.hasErrors('description')}">
+                                    <small class="text-danger" th:errors="*{description}"></small>
+                                </th:block>
                             </div>
                         </div>
                         <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
@@ -73,6 +79,9 @@
                             </div>
                             <div class="col-md-10 offset-md-1">
                                 <input id="availableFrom" name="availableFrom" class="form-control" style="font-family:Roboto, sans-serif;" type="date">
+                                <th:block th:if="${#fields.hasErrors('availableFrom')}">
+                                    <small class="text-danger" th:errors="*{availableFrom}"></small>
+                                </th:block>
                             </div>
                         </div>
                         <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
@@ -85,6 +94,9 @@
                             </div>
                             <div class="col-md-10 offset-md-1">
                                 <input id="until" class="form-control" name="until" style="font-family:Roboto, sans-serif;" type="date">
+                                <th:block th:if="${#fields.hasErrors('until')}">
+                                    <small class="text-danger" th:errors="*{until}"></small>
+                                </th:block>
                             </div>
                         </div>
                         <div class="form-row" style="margin-right:0px;margin-left:0px;padding-top:24px;">
