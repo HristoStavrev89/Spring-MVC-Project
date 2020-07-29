@@ -48,9 +48,7 @@ public class HomeController {
 
     @PostMapping("/home")
     @PreAuthorize("isAuthenticated()")
-    public String search(HomeSearchModel homeSearchModel) {
-
-
+    public ModelAndView search(HomeSearchModel homeSearchModel, ModelAndView modelAndView) {
 
         //attach founded to result page and redirect to it
 
@@ -59,10 +57,11 @@ public class HomeController {
                 .map(h -> this.modelMapper.map(h, HostViewModel.class))
                 .collect(Collectors.toList());
 
-        System.out.println();
+        //todo ako nqma rezultati da redirektva kum stranica koqto indikira 4e za vuprosnoto tursene nqma resultati
 
-
-        return null;
+        modelAndView.addObject("hostViewModels", hostViewModels);
+        modelAndView.setViewName("results");
+        return modelAndView;
     }
 
 }
