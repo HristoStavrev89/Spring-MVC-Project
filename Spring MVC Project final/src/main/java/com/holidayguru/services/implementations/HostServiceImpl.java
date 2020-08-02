@@ -94,4 +94,15 @@ public class HostServiceImpl implements HostService {
                 .map(h -> this.modelMapper.map(h, HostServiceModel.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<HostServiceModel> findAll() {
+
+        return this.hostRepository.findAll()
+                .stream()
+                .map(h -> this.modelMapper.map(h, HostServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+
 }

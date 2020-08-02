@@ -43,6 +43,9 @@ public class HomeController {
         modelAndView.setViewName("home");
         this.cityService.seedCities();
 
+        //todo check the cities
+
+
         return modelAndView;
     }
 
@@ -55,7 +58,10 @@ public class HomeController {
         List<HostViewModel> hostViewModels = this.hostService.findAllByCity(homeSearchModel.getCity(), homeSearchModel.getActivity())
                 .stream()
                 .map(h -> this.modelMapper.map(h, HostViewModel.class))
+                .filter(a -> a.getActivity().equals(homeSearchModel.getActivity()))
                 .collect(Collectors.toList());
+
+        System.out.println();
 
         //todo ako nqma rezultati da redirektva kum stranica koqto indikira 4e za vuprosnoto tursene nqma resultati
 

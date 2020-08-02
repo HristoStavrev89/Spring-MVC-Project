@@ -29,52 +29,78 @@
 <th:block
         th:include="~{/fragments/nav}">
 </th:block>
-    <div></div>
-    <div>
-        <div class="container" th:object="${hostViewModels}">
+<div></div>
+<div>
+    <div class="container" th:object="${hostViewModels}">
+        <!--            <div class="cust_bloglistintro">-->
+        <!--                <h2 class="text-center">Results</h2>-->
+        <!--                <p class="text-muted text-center">Тук мога да добавя, че показаните резултати са за съответните държава и град.</p>-->
+        <!--            </div>-->
+        <!--            <div class="row">-->
+        <!--                <th:block th:each="host : ${hostViewModels}" th:object="${host}">-->
+        <!--                <div class="col-md-4 cust_blogteaser">-->
+        <!--                    <a href="#">-->
+        <!--                    <img class="img-fluid" th:src="*{image}"></a>-->
+        <!--                    <h3 th:text="*{name}">Heading</h3>-->
+        <!--                    <h5 th:text="'Activity: ' + *{activity}">Activity</h5>-->
+        <!--                    <h5 th:text="'Available from: ' + *{availableFrom}">Available from:</h5>-->
+        <!--                    <h5 th:text="'Until: ' + *{until}">Until</h5>-->
+        <!--                    <p class="text-secondary" th:text="*{description}">Aenean tortor est, vulputate quis leo in, vehicuto suscipit id. </p>-->
+        <!--                </div>-->
+        <!--                </th:block>-->
+
+        <th:block th:if="${hostViewModels.isEmpty()}">
+            <!--                    <h2 style="margin:0 auto; padding: 230px" class="text-center">Sorry, there is no results for the current city and activity.</h2>-->
+            <img style="padding: 50px; text-align: center; display: block; margin-left: auto; margin-right: auto;" alt="no-result" height="600" width="800" src="/img/no-results-found.png">
+        </th:block>
+
+        <th:block th:unless="${hostViewModels.isEmpty()}">
             <div class="cust_bloglistintro">
                 <h2 class="text-center">Results</h2>
-                <p class="text-muted text-center">Тук мога да добавя, че показаните резултати са за съответните държава и град.</p>
+
             </div>
             <div class="row">
                 <th:block th:each="host : ${hostViewModels}" th:object="${host}">
-                <div class="col-md-4 cust_blogteaser">
-                    <a href="#">
-                    <img class="img-fluid" th:src="*{image}"></a>
-                    <h3 th:text="*{name}">Heading</h3>
-                    <h5 th:text="'Activity: ' + *{activity}">Activity</h5>
-                    <h5 th:text="'Available from: ' + *{availableFrom}">Available from:</h5>
-                    <h5 th:text="'Until: ' + *{until}">Until</h5>
-                    <p class="text-secondary" th:text="*{description}">Aenean tortor est, vulputate quis leo in, vehicuto suscipit id. </p>
-                </div>
+                    <div class="col-md-4 cust_blogteaser">
+                        <a href="#">
+                            <img class="img-fluid" th:src="*{image}"></a>
+                        <h3 th:text="*{name}">Heading</h3>
+                        <h5 th:text="'Activity: ' + *{activity}">Activity</h5>
+                        <h5 th:text="'Available from: ' + *{availableFrom}">Available from:</h5>
+                        <h5 th:text="'Until: ' + *{until}">Until</h5>
+                        <p class="text-secondary" th:text="*{description}">Aenean tortor est, vulputate quis leo in,
+                            vehicuto suscipit id. </p>
+                    </div>
                 </th:block>
-
-<!--                <div class="col-md-4 cust_blogteaser"><a href="#">-->
-<!--                    <img class="img-fluid" src="/img/building.jpg"></a>-->
-<!--                    <h3>Heading</h3>-->
-<!--                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;">Details</a>-->
-<!--                </div>-->
-<!--                <div class="col-md-4 cust_blogteaser"><a href="#">-->
-<!--                    <img class="img-fluid" src="/img/loft.jpg"></a>-->
-<!--                    <h3>Heading</h3>-->
-<!--                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;color: rgb(0,123,255);">Details</a>-->
-<!--                </div>-->
-<!--                <div-->
-<!--                    class="col-md-4 cust_blogteaser"><a href="#">-->
-<!--                    <img class="img-fluid" src="/img/minibus.jpeg"></a>-->
-<!--                    <h3>Heading</h3>-->
-<!--                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;">More</a>-->
-<!--                </div>-->
-        </div>
-    </div>
-    </div>
-    <footer>
-        <th:block
-                th:include="~{/fragments/footer}">
+            </div>
         </th:block>
-    </footer>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+        <!--                <div class="col-md-4 cust_blogteaser"><a href="#">-->
+        <!--                    <img class="img-fluid" src="/img/building.jpg"></a>-->
+        <!--                    <h3>Heading</h3>-->
+        <!--                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;">Details</a>-->
+        <!--                </div>-->
+        <!--                <div class="col-md-4 cust_blogteaser"><a href="#">-->
+        <!--                    <img class="img-fluid" src="/img/loft.jpg"></a>-->
+        <!--                    <h3>Heading</h3>-->
+        <!--                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;color: rgb(0,123,255);">Details</a>-->
+        <!--                </div>-->
+        <!--                <div-->
+        <!--                    class="col-md-4 cust_blogteaser"><a href="#">-->
+        <!--                    <img class="img-fluid" src="/img/minibus.jpeg"></a>-->
+        <!--                    <h3>Heading</h3>-->
+        <!--                    <p class="text-secondary">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, interdum justo suscipit id. </p><a href="#" style="font-size: 25px;">More</a>-->
+        <!--                </div>-->
+
+</div>
+</div>
+<footer>
+    <th:block
+            th:include="~{/fragments/footer}">
+    </th:block>
+</footer>
+<script src="/js/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

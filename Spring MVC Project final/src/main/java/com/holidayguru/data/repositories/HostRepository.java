@@ -17,4 +17,6 @@ public interface HostRepository extends JpaRepository<Host, String> {
 
     List<Host> findAllByCity(City city);
 
+
+
 }

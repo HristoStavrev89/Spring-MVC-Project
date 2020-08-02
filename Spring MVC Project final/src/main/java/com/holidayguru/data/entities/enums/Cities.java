@@ -6,7 +6,7 @@ public enum  Cities {
     VARNA,
     RUSE,
     BOURGAS,
-    PLOVIDV,
+    PLOVDIV,
 
     COLOGNE,
     BERLIN,
