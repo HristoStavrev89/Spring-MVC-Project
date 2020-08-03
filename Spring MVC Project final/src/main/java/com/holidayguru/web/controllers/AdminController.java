@@ -31,7 +31,7 @@ public class AdminController {
 
 
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_ROOT')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView adminPage(Principal principal, ModelAndView modelAndView) {
 
         String username = principal.getName();
@@ -50,7 +50,7 @@ public class AdminController {
 
 
     @GetMapping("/delete/{id}")
-    @PreAuthorize("hasRole('ROLE_ROOT')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteUser(@PathVariable String id){
 
 
@@ -60,7 +60,7 @@ public class AdminController {
     }
 
     @PostMapping("/change-role/{id}")
-    @PreAuthorize("hasRole('ROLE_ROOT')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String changeRole(@PathVariable String id, RoleBindingModel roleBindingModel){
         this.userService.changeUserRole(id, roleBindingModel.getRole());
         return "redirect:/admin";

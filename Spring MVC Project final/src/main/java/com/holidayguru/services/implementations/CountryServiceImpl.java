@@ -33,12 +33,8 @@ public class CountryServiceImpl implements CountryService {
             for (Countries country : Countries.values()) {
                 countryList.add(new Country(country.name()));
             }
-
             this.countryRepository.saveAll(countryList);
-
         }
-
-
     }
 
     @Override
