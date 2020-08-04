@@ -5,9 +5,7 @@ import com.holidayguru.web.api.models.UserResponseModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +26,7 @@ public class UserRestController {
 
 
 
-    @GetMapping("/all/users")
+    @GetMapping("/users/all")
     @PreAuthorize("hasAnyRole('ROLE_MODERATOR')")
     public List<UserResponseModel> getAllUsers(){
         return this.userService.findAllUsers()
@@ -36,4 +34,27 @@ public class UserRestController {
                 .map(u -> this.modelMapper.map(u, UserResponseModel.class))
                 .collect(Collectors.toList());
     }
+
+
+    @GetMapping("/users/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_MODERATOR')")
+    public UserResponseModel getAllUsers(@PathVariable String id){
+
+        return this.modelMapper.map(this.userService.findUserById(id), UserResponseModel.class);
+
+    }
+
+
+    @RequestMapping(
+            value = "/users/delete/{id}",
+            method = {RequestMethod.GET, RequestMethod.PUT}
+    )
+    @PreAuthorize("hasAnyRole('ROLE_MODERATOR')")
+    public void deleteUser(@PathVariable String id){
+        this.userService.deleteUserById(id);
+    }
+
+
+
+
 }

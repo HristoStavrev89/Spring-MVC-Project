@@ -52,7 +52,6 @@ public class HostServiceImpl implements HostService {
 
 
         host.setCity(city);
-        //todo check the comments
 
         this.hostRepository.saveAndFlush(host);
 
@@ -104,5 +103,10 @@ public class HostServiceImpl implements HostService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void deleteAllHostsByUserId(String userId) {
 
+        this.hostRepository.deleteAllByUserId(userId);
+
+    }
 }

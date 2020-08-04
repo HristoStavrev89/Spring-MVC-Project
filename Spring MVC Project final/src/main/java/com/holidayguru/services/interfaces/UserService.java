@@ -23,4 +23,5 @@ public interface UserService extends UserDetailsService {
 
     void changeUserRole(String userId, String role);
 
+    UserServiceModel findUserById(String id);
 }

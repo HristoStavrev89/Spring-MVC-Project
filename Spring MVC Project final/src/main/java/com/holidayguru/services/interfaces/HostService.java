@@ -16,4 +16,6 @@ public interface HostService {
     List<HostServiceModel> findAllByCity(String city, String activity);
 
     List<HostServiceModel> findAll();
+
+    void deleteAllHostsByUserId(String userId);
 }

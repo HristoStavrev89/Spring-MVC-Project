@@ -3,6 +3,7 @@ import com.holidayguru.data.entities.Role;
 import com.holidayguru.data.entities.User;
 import com.holidayguru.data.repositories.UserRepository;
 import com.holidayguru.exceptions.UserNotFoundException;
+import com.holidayguru.services.interfaces.HostService;
 import com.holidayguru.services.interfaces.RoleService;
 import com.holidayguru.services.interfaces.UserService;
 import com.holidayguru.services.models.RoleServiceModel;
@@ -16,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
@@ -30,13 +33,15 @@ public class UserServiceImpl implements UserService{
     private final ModelMapper modelMapper;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final RoleService roleService;
+    private final HostService hostService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder, RoleService roleService) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder, RoleService roleService, HostService hostService) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.roleService = roleService;
+        this.hostService = hostService;
     }
 
 
@@ -157,9 +162,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public void deleteUserById(String userId) {
+
+        //todo if hte user have hosts remove them first before delete
+
+
+
+        this.hostService.deleteAllHostsByUserId(userId);
+
+
+
         User user = this.userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("Can't find user."));
+                .orElseThrow(() -> new UserNotFoundException("Can't delete User because can't find User with the given ID."));
         this.userRepository.delete(user);
     }
 
@@ -174,5 +189,16 @@ public class UserServiceImpl implements UserService{
         user.getAuthorities().add(this.modelMapper.map(roleServiceModel, Role.class));
 
         this.userRepository.saveAndFlush(user);
+    }
+
+
+    @Override
+    public UserServiceModel findUserById(String id) {
+
+        User user = this.userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Can't find user with the given ID."));
+
+
+        return this.modelMapper.map(user, UserServiceModel.class);
     }
 }
