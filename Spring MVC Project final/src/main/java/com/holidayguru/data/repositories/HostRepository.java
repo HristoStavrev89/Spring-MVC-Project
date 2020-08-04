@@ -19,4 +19,6 @@ public interface HostRepository extends JpaRepository<Host, String> {
 
     void deleteAllByUserId(String id);
 
+    Optional<Host> findById(String id);
+
 }

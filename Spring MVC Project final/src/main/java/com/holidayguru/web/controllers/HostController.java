@@ -99,6 +99,7 @@ public class HostController {
                 .collect(Collectors.toList());
 
 
+
         modelAndView.addObject("hostViewModelList", hostViewModelList);
         modelAndView.setViewName("my-hosts");
 

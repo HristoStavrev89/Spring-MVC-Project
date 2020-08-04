@@ -7,6 +7,7 @@ import com.holidayguru.data.entities.enums.Activity;
 import com.holidayguru.data.repositories.CityRepository;
 import com.holidayguru.data.repositories.HostRepository;
 import com.holidayguru.data.repositories.UserRepository;
+import com.holidayguru.exceptions.HostNotFoundException;
 import com.holidayguru.services.interfaces.CityService;
 import com.holidayguru.services.interfaces.HostService;
 import com.holidayguru.services.models.CityServiceModel;
@@ -62,10 +63,15 @@ public class HostServiceImpl implements HostService {
     @Override
     public List<HostServiceModel> findAllByUserId(String userId) {
 
+        //todo set city
+
         List<HostServiceModel> hostServiceModelList = this.hostRepository.findAllByUser_Id(userId)
                 .stream()
                 .map(h -> this.modelMapper.map(h, HostServiceModel.class))
+
                 .collect(Collectors.toList());
+
+        System.out.println();
 
         return hostServiceModelList;
     }
@@ -108,5 +114,15 @@ public class HostServiceImpl implements HostService {
 
         this.hostRepository.deleteAllByUserId(userId);
 
+    }
+
+
+    @Override
+    public HostServiceModel findByHostId(String id) {
+
+        Host host = this.hostRepository.findById(id)
+                .orElseThrow(() -> new HostNotFoundException("Can't find host with the given ID."));
+
+        return this.modelMapper.map(host, HostServiceModel.class);
     }
 }

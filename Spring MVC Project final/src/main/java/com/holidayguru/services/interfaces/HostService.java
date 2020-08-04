@@ -18,4 +18,6 @@ public interface HostService {
     List<HostServiceModel> findAll();
 
     void deleteAllHostsByUserId(String userId);
+
+    HostServiceModel findByHostId(String id);
 }
