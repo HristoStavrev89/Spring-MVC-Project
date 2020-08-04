@@ -29,7 +29,7 @@ public class Host extends BaseEntity{
 //    private Set<Comment> comments;
 
 
-    //todo da dobavq list sus comentari koito 6te pazi hosta kakto i images
+    //todo add list with comments to the user
 
     public Host() {
     }

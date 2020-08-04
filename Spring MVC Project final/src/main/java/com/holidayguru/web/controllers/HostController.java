@@ -1,6 +1,7 @@
 package com.holidayguru.web.controllers;
 
 import com.holidayguru.data.entities.Host;
+import com.holidayguru.exceptions.ImageSizeLimitExceededException;
 import com.holidayguru.services.interfaces.*;
 import com.holidayguru.services.models.HostServiceModel;
 import com.holidayguru.services.models.UserServiceModel;
@@ -8,6 +9,7 @@ import com.holidayguru.web.controllers.models.bindingModels.HostAddBindingModel;
 import com.holidayguru.web.controllers.models.viewModels.HostViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,12 +62,20 @@ public class HostController {
     public String addHostConfirm(@Valid @ModelAttribute("hostAddBindingModel") HostAddBindingModel hostAddBindingModel,
                                  BindingResult bindingResult, RedirectAttributes redirectAttributes, Principal principal) throws IOException {
 
+
+
         if (bindingResult.hasErrors() || hostAddBindingModel.getImage().isEmpty()){
             redirectAttributes.addFlashAttribute("hostAddBindingModel", hostAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.hostAddBindingModel", bindingResult);
 
             return "redirect:host-add";
         }
+
+
+        byte[] imgBytes = hostAddBindingModel.getImage().getBytes();
+        long imgSize = hostAddBindingModel.getImage().getSize();
+
+        System.out.println();
 
         String username = principal.getName();
         HostServiceModel hostServiceModel = this.modelMapper.map(hostAddBindingModel, HostServiceModel.class);
@@ -117,6 +127,16 @@ public class HostController {
     }
 
 
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler({ImageSizeLimitExceededException.class})
+    public ModelAndView handleImageSizeLimitException(ImageSizeLimitExceededException ex){
+
+        ModelAndView modelAndView = new ModelAndView("error-test");
+        modelAndView.addObject("message", ex.getMessage());
+
+        return modelAndView;
+
+    }
 
 
 

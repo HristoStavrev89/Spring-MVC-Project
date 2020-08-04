@@ -71,7 +71,7 @@ public class HostServiceImpl implements HostService {
 
                 .collect(Collectors.toList());
 
-        System.out.println();
+
 
         return hostServiceModelList;
     }

@@ -4,7 +4,9 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class HostAddBindingModel {
@@ -60,6 +62,7 @@ public class HostAddBindingModel {
     public void setCity(String city) {
         this.city = city;
     }
+
 
 
 
