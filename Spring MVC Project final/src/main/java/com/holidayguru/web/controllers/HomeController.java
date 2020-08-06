@@ -1,15 +1,19 @@
 package com.holidayguru.web.controllers;
 
+import com.holidayguru.exceptions.ImageSizeLimitExceededException;
 import com.holidayguru.services.interfaces.CityService;
 import com.holidayguru.services.interfaces.HostService;
 import com.holidayguru.web.controllers.models.bindingModels.HomeSearchModel;
 import com.holidayguru.web.controllers.models.viewModels.HostViewModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -53,7 +57,6 @@ public class HomeController {
     @PreAuthorize("isAuthenticated()")
     public ModelAndView search(HomeSearchModel homeSearchModel, ModelAndView modelAndView) {
 
-        //attach founded to result page and redirect to it
 
         List<HostViewModel> hostViewModels = this.hostService.findAllByCity(homeSearchModel.getCity(), homeSearchModel.getActivity())
                 .stream()
@@ -61,9 +64,6 @@ public class HomeController {
                 .filter(a -> a.getActivity().equals(homeSearchModel.getActivity()))
                 .collect(Collectors.toList());
 
-        System.out.println();
-
-        //todo ako nqma rezultati da redirektva kum stranica koqto indikira 4e za vuprosnoto tursene nqma resultati
 
         modelAndView.addObject("hostViewModels", hostViewModels);
         modelAndView.setViewName("results");

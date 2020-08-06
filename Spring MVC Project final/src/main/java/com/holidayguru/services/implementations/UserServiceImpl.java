@@ -167,8 +167,6 @@ public class UserServiceImpl implements UserService{
 
         //todo if hte user have hosts remove them first before delete
 
-
-
         this.hostService.deleteAllHostsByUserId(userId);
 
 

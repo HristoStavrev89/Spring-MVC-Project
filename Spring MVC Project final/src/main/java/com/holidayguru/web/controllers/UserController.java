@@ -6,6 +6,7 @@ import com.holidayguru.web.controllers.models.bindingModels.UserRegisterBindingM
 import com.holidayguru.web.controllers.models.bindingModels.UserProfileEditBindingModel;
 import com.holidayguru.web.controllers.models.viewModels.UserProfileViewModel;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
+    @Autowired
     public UserController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
@@ -51,7 +53,6 @@ public class UserController {
 
 
         if (bindingResult.hasErrors() || !userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getRepeatPassword())) {
-            //todo Show message when the passwords are different.
 
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);

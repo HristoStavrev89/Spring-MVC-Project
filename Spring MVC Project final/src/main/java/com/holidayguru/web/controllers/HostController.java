@@ -72,16 +72,9 @@ public class HostController {
         }
 
 
-        byte[] imgBytes = hostAddBindingModel.getImage().getBytes();
-        long imgSize = hostAddBindingModel.getImage().getSize();
-
-        System.out.println();
-
         String username = principal.getName();
         HostServiceModel hostServiceModel = this.modelMapper.map(hostAddBindingModel, HostServiceModel.class);
 
-
-        //todo the image should me smaller than 1mb!!!!
 
         hostServiceModel.setImage(this.cloudinaryService.uploadImg(hostAddBindingModel.getImage()));
 
@@ -127,16 +120,7 @@ public class HostController {
     }
 
 
-    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler({ImageSizeLimitExceededException.class})
-    public ModelAndView handleImageSizeLimitException(ImageSizeLimitExceededException ex){
 
-        ModelAndView modelAndView = new ModelAndView("error-test");
-        modelAndView.addObject("message", ex.getMessage());
-
-        return modelAndView;
-
-    }
 
 
 

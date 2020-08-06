@@ -1,6 +1,7 @@
 package com.holidayguru.web.controllers;
 
 import com.holidayguru.services.interfaces.RoleService;
+import com.holidayguru.services.interfaces.StatsService;
 import com.holidayguru.services.interfaces.UserService;
 import com.holidayguru.web.controllers.models.bindingModels.RoleBindingModel;
 import com.holidayguru.web.controllers.models.viewModels.RoleView;
@@ -22,11 +23,13 @@ import java.util.List;
 public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
+    private final StatsService statsService;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminController(UserService userService, RoleService roleService, StatsService statsService) {
         this.userService = userService;
         this.roleService = roleService;
+        this.statsService = statsService;
     }
 
 
@@ -39,6 +42,9 @@ public class AdminController {
         List<UserProfileViewModel> userProfileViewModels = this.userService.getAllUsersWithoutRootRole(username);
 
         List<RoleView> allRoles = this.roleService.findAllRolesViewModels();
+
+        modelAndView.addObject("requestCount", this.statsService.getRequestCount());
+        modelAndView.addObject("startedOn", this.statsService.getStartedOn());
 
         modelAndView.addObject("roleBindingModel", new RoleBindingModel());
         modelAndView.addObject("userProfileViewModels", userProfileViewModels);
