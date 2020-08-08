@@ -38,7 +38,11 @@ public class HostRestController {
     @GetMapping("/hosts/{id}")
     @PreAuthorize("hasAnyRole('ROLE_MODERATOR')")
     public HostResposneModel getAllHosts(@PathVariable String id){
+
         return this.modelMapper.map(this.hostService.findByHostId(id), HostResposneModel.class);
+
+
+
     }
 
 

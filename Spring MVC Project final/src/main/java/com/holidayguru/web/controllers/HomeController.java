@@ -1,6 +1,7 @@
 package com.holidayguru.web.controllers;
 
 import com.holidayguru.exceptions.ImageSizeLimitExceededException;
+import com.holidayguru.exceptions.ResourceNotFoundException;
 import com.holidayguru.services.interfaces.CityService;
 import com.holidayguru.services.interfaces.HostService;
 import com.holidayguru.web.controllers.models.bindingModels.HomeSearchModel;
@@ -69,5 +70,9 @@ public class HomeController {
         modelAndView.setViewName("results");
         return modelAndView;
     }
+
+
+
+
 
 }

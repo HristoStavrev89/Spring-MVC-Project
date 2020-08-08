@@ -3,6 +3,7 @@ import com.holidayguru.data.entities.Role;
 import com.holidayguru.data.entities.User;
 import com.holidayguru.data.repositories.UserRepository;
 import com.holidayguru.exceptions.UserNotFoundException;
+import com.holidayguru.exceptions.UsernameAlreadyTakenException;
 import com.holidayguru.services.interfaces.HostService;
 import com.holidayguru.services.interfaces.RoleService;
 import com.holidayguru.services.interfaces.UserService;
@@ -50,10 +51,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
 
-        //TODO Throw exception if already exist
-//        if (this.userRepository.findByUsername(userServiceModel.getUsername()).isPresent()) {
-//
-//        }
+
+        if (this.userRepository.findByUsername(userServiceModel.getUsername()).isPresent()) {
+
+            throw new UsernameAlreadyTakenException(String.format("Username %s already exist.", userServiceModel.getUsername()));
+        }
 
         if (this.userRepository.count() == 0) {
             this.roleService.seedRoles();

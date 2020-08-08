@@ -72,6 +72,7 @@ public class HostController {
         }
 
 
+
         String username = principal.getName();
         HostServiceModel hostServiceModel = this.modelMapper.map(hostAddBindingModel, HostServiceModel.class);
 

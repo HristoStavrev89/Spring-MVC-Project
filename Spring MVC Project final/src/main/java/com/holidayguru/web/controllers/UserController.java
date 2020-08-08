@@ -104,7 +104,7 @@ public class UserController {
                                              BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
         //todo da validiram parolata - ako password e gre6no da vadi gre6ka i da ne se smenq s novata
-        //todo kakto i pri gre6ka poletata da se populvat sami
+
 
         if (bindingResult.hasErrors() || !userProfileEditBindingModel.getNewPassword().equals(userProfileEditBindingModel.getConfirmPassword())) {
             redirectAttributes.addFlashAttribute("userProfileEditBindingModel", userProfileEditBindingModel);

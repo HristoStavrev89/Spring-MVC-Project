@@ -2,6 +2,7 @@ package com.holidayguru.config;
 
 import com.cloudinary.Cloudinary;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +29,7 @@ public class AppBeanConfiguration {
     public SpringSecurityDialect springSecurityDialect(){
         return new SpringSecurityDialect();
     }
+
 
 
 }

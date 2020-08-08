@@ -1,5 +1,6 @@
 package com.holidayguru.web.controllers;
 
+import com.holidayguru.exceptions.UserNotFoundException;
 import com.holidayguru.services.interfaces.RoleService;
 import com.holidayguru.services.interfaces.StatsService;
 import com.holidayguru.services.interfaces.UserService;
@@ -7,12 +8,10 @@ import com.holidayguru.web.controllers.models.bindingModels.RoleBindingModel;
 import com.holidayguru.web.controllers.models.viewModels.RoleView;
 import com.holidayguru.web.controllers.models.viewModels.UserProfileViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -41,6 +40,10 @@ public class AdminController {
 
         List<UserProfileViewModel> userProfileViewModels = this.userService.getAllUsersWithoutRootRole(username);
 
+        if (userProfileViewModels == null) {
+            throw new UserNotFoundException("Can't find users.");
+        }
+
         List<RoleView> allRoles = this.roleService.findAllRolesViewModels();
 
         modelAndView.addObject("requestCount", this.statsService.getRequestCount());
@@ -57,7 +60,7 @@ public class AdminController {
 
     @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String deleteUser(@PathVariable String id){
+    public String deleteUser(@PathVariable String id) {
 
 
         this.userService.deleteUserById(id);
@@ -67,10 +70,24 @@ public class AdminController {
 
     @PostMapping("/change-role/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String changeRole(@PathVariable String id, RoleBindingModel roleBindingModel){
+    public String changeRole(@PathVariable String id, RoleBindingModel roleBindingModel) {
         this.userService.changeUserRole(id, roleBindingModel.getRole());
         return "redirect:/admin";
     }
+
+
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    @ExceptionHandler({UserNotFoundException.class})
+//    public ModelAndView handleHelloException(UserNotFoundException ex) {
+//
+//        ModelAndView modelAndView = new ModelAndView("error-handling");
+//        modelAndView.addObject("message", ex.getMessage());
+//
+//        return modelAndView;
+//    }
+
+
+
 
 
 }
