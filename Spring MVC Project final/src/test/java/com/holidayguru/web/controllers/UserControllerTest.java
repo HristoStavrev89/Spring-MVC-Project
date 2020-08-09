@@ -40,8 +40,11 @@ public class UserControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+
+
+
     @BeforeEach
-    public void setUo(){
+    public void setUp(){
         userRepository.deleteAll();
 
         User user = new User();
@@ -75,6 +78,8 @@ public class UserControllerTest {
 
     @Test
     public void userRegisterConfirm_ShouldCreateNewUSerWithCorrectParams() throws Exception {
+
+
 
         long repoCount = this.userRepository.count();
 
@@ -172,6 +177,25 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("login"));
     }
+
+
+
+    @Test
+    public void userProfileEdit_GetPageWithRedirectStatusCode() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/users/profile-edit"))
+                .andExpect(status().is(302));
+    }
+
+
+    @Test
+    public void userProfilePage_ShouldGETThePageWithCorrectStatusCode() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/users/my-profile"))
+                .andExpect(status().is(302));
+    }
+
+
 
 
 
