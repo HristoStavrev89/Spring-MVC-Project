@@ -103,7 +103,6 @@ public class UserController {
     public String myProfileEditConfirm(@Valid @ModelAttribute("userProfileEditBindingModel") UserProfileEditBindingModel userProfileEditBindingModel,
                                              BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
-        //todo da validiram parolata - ako password e gre6no da vadi gre6ka i da ne se smenq s novata
 
 
         if (bindingResult.hasErrors() || !userProfileEditBindingModel.getNewPassword().equals(userProfileEditBindingModel.getConfirmPassword())) {
